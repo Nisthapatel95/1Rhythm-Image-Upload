@@ -1,0 +1,13 @@
+
+<div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+    <ngx-dropzone-label>Drag and Drop Here!
+       <div><span class="bi bi-cloud-arrow-up-fill"></span></div> 
+    </ngx-dropzone-label>
+
+<!-- </ngx-dropzone> -->
+</div>
+<div ngx-dropzone style="border: 0px !important;">
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true"
+        (removed)="onRemove(f)">
+    </ngx-dropzone-image-preview>
+</div>
