@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+// import { DialogboxComponent } from '../dialogbox/dialogbox.component';
+// import { CdkOverlayService } from '../shared/services/cdk/cdk-overlay.service';
+
 import { NotificationService } from './notification.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-image-upload',
@@ -11,7 +15,12 @@ export class ImageUploadComponent implements OnInit {
   files: File[] = [];
   public total_images: number = 0;
   selectedImage: any;
-  constructor(private notifyService: NotificationService) { }
+  constructor(private notifyService: NotificationService,
+    // private cdkoverlayservice: CdkOverlayService,
+    private modalService: NgbModal
+    
+   
+    ) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +28,7 @@ export class ImageUploadComponent implements OnInit {
   onSelect(event: any) {
     console.log(event);
     let beforeUpdateFile = this.files.length;
-    if(event.rejectedFiles.length!=0){
+    if (event.rejectedFiles.length != 0) {
       this.notifyService.showError("Please upload a valid file format (Supported file formats: .jpg, .png, .jpeg, .heif)");
     }
     this.total_images += event.addedFiles.length;
@@ -41,12 +50,22 @@ export class ImageUploadComponent implements OnInit {
   }
   onRemove(event: any) {
     console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
-    this.total_images = this.total_images - 1;
+    // this.files.splice(this.files.indexOf(event), 1);
+    
     console.log(this.total_images);
+    this.modalService.open(event, { centered: true });
+    
+  // this.cdkoverlayservice.displayOverlay(DialogboxComponent)
   }
 
   setFavImage(selectedImage: any) {
     this.selectedImage = selectedImage
+  }
+  // openDeletePopup(event:any){
+  //   this.modalService.open(event, { centered: true });
+  // }
+  ondelet(event:any){
+    this.files.splice(this.files.indexOf(event), 1);
+    this.total_images = this.total_images - 1;
   }
 }

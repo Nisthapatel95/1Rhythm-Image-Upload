@@ -1,22 +1,42 @@
-
-<div class="custom-dropzone" ngx-dropzone accept="image/jpeg,image/jpg,image/png,image/gif"  [maxFileSize]="5000000" (change)="onSelect($event)">
-    <ngx-dropzone-label>Drag and Drop Here!
-       <div><span class="bi bi-cloud-arrow-up-fill"></span></div> 
+<div class="custom-dropzone" ngx-dropzone accept="image/jpeg,image/jpg,image/png,image/gif" [maxFileSize]="5000000"
+    (change)="onSelect($event)">
+    <ngx-dropzone-label>Upload Images or Just Drag And Drop <br>
+        +Add 5 Images
+        <div><span class="bi bi-cloud-arrow-up-fill"></span></div>
     </ngx-dropzone-label>
 
-<!-- </ngx-dropzone> -->
+    <!-- </ngx-dropzone> -->
 
 </div>
-<div >
-    <ngx-dropzone-image-preview *ngIf="selectedImage"  ngProjectAs="ngx-dropzone-preview" [file]="selectedImage" [removable]="true"
-    (removed)="onRemove(selectedImage)">
-</ngx-dropzone-image-preview>
+<div>
+    <ngx-dropzone-image-preview *ngIf="selectedImage" ngProjectAs="ngx-dropzone-preview" [file]="selectedImage"
+        [removable]="true" (removed)="onRemove(selectedImage)">
+    </ngx-dropzone-image-preview>
 </div>
 <div ngx-dropzone style="border: 0px !important; ">
-    <ngx-dropzone-image-preview style="position: relative;" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true"
-        (removed)="onRemove(f)">
+    <ngx-dropzone-image-preview style="position: relative;" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+        [file]="f" [removable]="true" (removed)="onRemove(content)" >
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Confirmation of Delete</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to Delete?&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    (click)="modal.close('Close click')">No</button>
+                <button type="button" class="btn btn-secondary"
+                    (click)="modal.close('Close click'); ondelet(f)">Yes</button>
+            </div>
+        </ng-template>
         <ngx-dropzone-label>
-            <img  class="fav" (click)="setFavImage(f)" src="../../assets/Vector.png" width="100" height="100"/>
+            <img class="fav" (click)="setFavImage(f)" src="../../assets/Vector.png" >
+      
+                <span class="icon-Close fav icon"></span>
+              
         </ngx-dropzone-label>
     </ngx-dropzone-image-preview>
 </div>

@@ -6,20 +6,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { DialogboxComponent } from './dialogbox/dialogbox.component';
+// import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+
+ 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
     NgxDropzoneModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule,  
+    
   ],
-  providers: [],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
